@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and subscription data.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "subscriptionTier": { "type": "string", "enum": ["free", "basic", "premium"] },
+        "stripeCustomerId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Media": {
+      "title": "Media",
+      "description": "Movie or series metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["movie", "series"] },
+        "genre": { "type": "string" },
+        "rating": { "type": "string" },
+        "year": { "type": "integer" },
+        "posterUrl": { "type": "string" },
+        "backdropUrl": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "isOriginal": { "type": "boolean" }
+      },
+      "required": ["title", "type", "videoUrl"]
+    },
+    "WatchHistory": {
+      "title": "WatchHistory",
+      "description": "User's watch history for recommendations.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "mediaId": { "type": "string" },
+        "watchedAt": { "type": "string", "format": "date-time" },
+        "progress": { "type": "number" }
+      },
+      "required": ["userId", "mediaId"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/media/{mediaId}": {
+      "schema": "Media",
+      "description": "Content catalog."
+    },
+    "/watch_history/{historyId}": {
+      "schema": "WatchHistory",
+      "description": "User watch history."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "NETSEX",
+  "description": "A modern, high-performance streaming platform prototype with adaptive quality and personalized recommendations.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
